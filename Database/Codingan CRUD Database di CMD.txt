@@ -1,0 +1,76 @@
+C:\Users\SMA MARSUDIRINI>psql -U postgres
+Password for user postgres:
+psql (14.2)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# \l
+                                             List of databases
+   Name    |  Owner   | Encoding |        Collate         |         Ctype          |   Access privileges
+-----------+----------+----------+------------------------+------------------------+-----------------------
+ myskill   | postgres | UTF8     | English_Indonesia.1252 | English_Indonesia.1252 |
+ postgres  | postgres | UTF8     | English_Indonesia.1252 | English_Indonesia.1252 |
+ template0 | postgres | UTF8     | English_Indonesia.1252 | English_Indonesia.1252 | =c/postgres          +
+           |          |          |                        |                        | postgres=CTc/postgres
+ template1 | postgres | UTF8     | English_Indonesia.1252 | English_Indonesia.1252 | =c/postgres          +
+           |          |          |                        |                        | postgres=CTc/postgres
+(4 rows)
+
+
+postgres=# \c myskill
+You are now connected to database "myskill" as user "postgres".
+myskill=# \dt
+          List of relations
+ Schema |   Name   | Type  |  Owner
+--------+----------+-------+----------
+ public | kelas_10 | table | postgres
+(1 row)
+
+
+myskill=# SELECT FROM * kelas_10;
+ERROR:  syntax error at or near "*"
+LINE 1: SELECT FROM * kelas_10;
+                    ^
+myskill=# SELECT * FROM kelas_10;
+ siswa_id | nama_siswa | umur
+----------+------------+------
+        1 | Shinta     | 15
+        2 | Dono       | 16
+(2 rows)
+
+
+myskill=# INSERT INTO kelas_10 (siswa_id, nama_siswa, umur) VALUES (3, 'Kasino', 14);
+INSERT 0 1
+myskill=# SELECT * FROM kelas_10;
+ siswa_id | nama_siswa | umur
+----------+------------+------
+        1 | Shinta     | 15
+        2 | Dono       | 16
+        3 | Kasino     | 14
+(3 rows)
+
+
+myskill=# UPDATE kelas_10 SET siswa_id=3, nama_siswa='Indro', umur=15 WHERE siswa_id=3;
+UPDATE 1
+myskill=# SELECT * FROM kelas_10;
+ siswa_id | nama_siswa | umur
+----------+------------+------
+        1 | Shinta     | 15
+        2 | Dono       | 16
+        3 | Indro      | 15
+(3 rows)
+
+
+myskill=# DELETE FROM kelas_10 WHERE siswa_id=3;
+DELETE 1
+myskill=# SELECT * FROM kelas_10;
+ siswa_id | nama_siswa | umur
+----------+------------+------
+        1 | Shinta     | 15
+        2 | Dono       | 16
+(2 rows)
+
+
+myskill=#
